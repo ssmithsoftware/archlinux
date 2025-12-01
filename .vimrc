@@ -18,8 +18,6 @@ set shiftwidth=4
 set shortmess+=I
 set softtabstop=-1
 
-set tabstop=4
-
 " Edit previous buffer in vertical split
 nnoremap <Leader>ep :vertical sbprevious<CR>
 

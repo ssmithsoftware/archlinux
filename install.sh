@@ -12,3 +12,5 @@ ln -s $dir.bash_logout $dir.bash_profile \
 cd $XDG_CONFIG_HOME
 ln -s $dir.config/hypr/ $dir.config/kitty/ \
 	$dir.config/waybar/ .
+
+echo 'Reboot system to reload hyprland and view changes.'

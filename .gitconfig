@@ -1,45 +1,45 @@
 [alias]
-    a = add
-    b = branch
-    c = commit
-    d = diff
-    dt = difftool
-    i = init
-    m = merge
-    p = push
-    pl = pull
-    r = restore
-    s = status
-    sw = switch
-    ctags = !.git/hooks/ctags
-    sclone = clone --recurse-submodules
-    sdiff = !git diff && git submodule foreach 'git diff'
-    spush = push --recurse-submodules=on-demand
-    supdate = submodule update --remote --merge
+	a = add
+	b = branch
+	c = commit
+	d = diff
+	dt = difftool
+	i = init
+	m = merge
+	p = push
+	pl = pull
+	r = restore
+	s = status
+	sw = switch
+	ctags = !.git/hooks/ctags
+	sclone = clone --recurse-submodules
+	sdiff = !git diff && git submodule foreach 'git diff'
+	spush = push --recurse-submodules=on-demand
+	supdate = submodule update --remote --merge
 [core]
-    editor = vim
+	editor = vim
 [credential]
-    helper = store --file ~/.gitcredentials
+	helper = store --file ~/.gitcredentials
 [diff]
-    submodule = log
-    tool = vimdiff
+	submodule = log
+	tool = vimdiff
 [difftool]
-    prompt = false
+	prompt = false
 [init]
-    defaultBranch = master
-    templateDir = ~/.gittemplate
+	defaultBranch = master
+	templateDir = ~/.gittemplate
 [merge]
-    tool = vimdiff
+	tool = vimdiff
 [mergetool]
-    keepBackup = false
+	keepBackup = false
 [mergetool "vimdiff"]
-    trustExitCode = false
+	trustExitCode = false
 [push]
-    recurseSubmodules = on-demand
+	recurseSubmodules = on-demand
 [status]
-    submoduleSummary = true
+	submoduleSummary = true
 [submodule]
-    recurse = true
+	recurse = true
 [user]
-    email = scottadamsmith1@gmail.com
-    name = scott
+	email = scottadamsmith1@gmail.com
+	name = scott

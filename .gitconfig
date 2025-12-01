@@ -1,0 +1,45 @@
+[alias]
+    a = add
+    b = branch
+    c = commit
+    d = diff
+    dt = difftool
+    i = init
+    m = merge
+    p = push
+    pl = pull
+    r = restore
+    s = status
+    sw = switch
+    ctags = !.git/hooks/ctags
+    sclone = clone --recurse-submodules
+    sdiff = !git diff && git submodule foreach 'git diff'
+    spush = push --recurse-submodules=on-demand
+    supdate = submodule update --remote --merge
+[core]
+    editor = vim
+[credential]
+    helper = store --file ~/.gitcredentials
+[diff]
+    submodule = log
+    tool = vimdiff
+[difftool]
+    prompt = false
+[init]
+    defaultBranch = master
+    templateDir = ~/.gittemplate
+[merge]
+    tool = vimdiff
+[mergetool]
+    keepBackup = false
+[mergetool "vimdiff"]
+    trustExitCode = false
+[push]
+    recurseSubmodules = on-demand
+[status]
+    submoduleSummary = true
+[submodule]
+    recurse = true
+[user]
+    email = scottadamsmith1@gmail.com
+    name = scott

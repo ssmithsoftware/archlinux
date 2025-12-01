@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Pipe file list into ctags
+git ls-files | ctags -L -

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Get names of staged files added, copied, modified, or renamed. Exit if zero
+FILES=$(git diff --cached --diff-filter=ACMR --name-only | sed 's/ /\\ /g')
+[ -z "$FILES" ] && exit 0
+
+# Format staged files
+echo "$FILES" | xargs prettier --ignore-unknown --write
+
+# Stage formatted files
+echo "$FILES" | xargs git add

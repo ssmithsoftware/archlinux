@@ -1,0 +1,54 @@
+window {
+	background-color: transparent;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	/* height specified in ./config.jsonc */
+}
+
+tooltip,
+window > box {
+	background-color: rgba(0, 0, 0, 0.8);
+	border: 0;
+	box-shadow: 0.5em 0.5em 0.75em rgba(0, 0, 0, 0.2);
+}
+
+label {
+	color: rgba(255, 255, 255, 0.75);
+}
+
+#clock {
+	letter-spacing: 0.2em;
+}
+
+#network,
+#cpu,
+#memory {
+	margin-right: 1.5em;
+}
+
+button,
+.text-button {
+	background-image: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	min-width: 3em;
+	text-shadow: none;
+	transition: background-image 150ms ease-in-out;
+}
+
+button.active,
+.text-button:hover {
+	/* Gradient colors inspired by hyprland.conf default border active with lowered opacity. */
+	background-image: linear-gradient(
+		to bottom right,
+		rgba(51, 204, 255, 0.5) 50%,
+		rgba(0, 255, 153, 0.5)
+	);
+}
+
+button:hover {
+	-gtk-icon-effect: none;
+	-gtk-icon-shadow: none;
+}

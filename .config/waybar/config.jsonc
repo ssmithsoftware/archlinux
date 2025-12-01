@@ -1,0 +1,61 @@
+{
+	// Stop waybar from readjusting height after loading
+	"height": 42,
+	"layer": "top",
+	"modules-left": ["hyprland/workspaces"],
+	"modules-center": ["clock"],
+	"modules-right": [
+		"network",
+		"cpu",
+		"memory",
+		"custom/system",
+		"custom/reboot",
+		"custom/shutdown"
+	],
+	"hyprland/workspaces": {
+		"all-outputs": true,
+		"format": "{id} {windows}",
+		"move-to-monitor": true,
+		"workspace-taskbar": {
+			"enable": true
+		}
+	},
+	"clock": {
+		"format": "{:%D %I:%M %p}",
+		"tooltip-format": "<tt><big>{calendar}</big></tt>"
+	},
+	"network": {
+		"cursor": 2,
+		"format-disconnected": "No Network ",
+		"format-ethernet": "",
+		"format-linked": "No IP ",
+		"format-wifi": "({signalStrength}%) ",
+		"tooltip": false
+	},
+	"cpu": {
+		"format": "{usage}% "
+	},
+	"memory": {
+		"format": "{percentage}% "
+	},
+	"custom/system": {
+		"cursor": 2,
+		"format": "",
+		"on-click": "kitty btop",
+		"tooltip-format": "System"
+	},
+	// systemd will shut down all units cleanly during reboot and shutdown. See: https://github.com/hyprwm/Hyprland/discussions/8459#discussioncomment-11359512
+	"custom/reboot": {
+		"cursor": 2,
+		"format": "",
+		"on-click": "reboot",
+		"tooltip-format": "Reboot"
+	},
+	"custom/shutdown": {
+		"cursor": 2,
+		"format": "",
+		"on-click": "shutdown 0",
+		"tooltip-format": "Shutdown"
+	},
+	"reload_style_on_change": true
+}

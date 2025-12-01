@@ -13,7 +13,7 @@ ln -s $dir.bash_logout $dir.bash_profile \
 cd $XDG_CONFIG_HOME
 ln -s $dir.config/hypr/ $dir.config/kitty/ $dir.config/waybar/ .
 
-read -p "$msg Would you like to reboot now? (y/n): " $input
+read -p "$msg Would you like to reboot now? (y/n): " input
 
 case $input in
     [Yy]*) echo 'Rebooting...';;

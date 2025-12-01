@@ -1,0 +1,3 @@
+[submodule "prettier"]
+	path = prettier
+	url = https://github.com/ssmithsoftware/prettier.git

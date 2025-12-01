@@ -11,7 +11,8 @@ ln -s $dir.bash_logout $dir.bash_profile \
 	$dir.inputrc $dir.prettierrc $dir.profile $dir.vimrc .
 
 cd $XDG_CONFIG_HOME
-ln -s $dir.config/hypr/ $dir.config/kitty/ $dir.config/waybar/ .
+ln -s $dir.config/hypr/ $dir.config/kitty/ \
+    $dir.config/uwsm/ $dir.config/waybar/ .
 
 read -p "$msg Would you like to reboot now? (y/n): " input
 

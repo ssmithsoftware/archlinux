@@ -30,19 +30,19 @@ nnoremap <Leader>nh :nohlsearch<CR>
 
 " Remove all trailing whitespace before buffer write
 augroup remove_whitespace
-	autocmd!
-	autocmd BufWritePre * %substitute/\s\+$//e
+    autocmd!
+    autocmd BufWritePre * %substitute/\s\+$//e
 augroup END
 
 
 if &diff
-	" Adjust syntax highlighting for diff
-	set termguicolors
+    " Adjust syntax highlighting for diff
+    set termguicolors
 else
-	" Save manual folds when not in diff mode or help files
-	augroup save_folds
-		autocmd!
-		autocmd BufWinEnter * silent! loadview
-		autocmd BufWinLeave * mkview
-	augroup END
+    " Save manual folds when not in diff mode or help files
+    augroup save_folds
+        autocmd!
+        autocmd BufWinEnter * silent! loadview
+        autocmd BufWinLeave * mkview
+    augroup END
 endif

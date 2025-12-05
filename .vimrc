@@ -24,12 +24,15 @@ set incsearch
 
 if &diff
 	" Adjust syntax highlighting for diff
-	set termguicolors
+	highlight DiffAdd cterm=bold ctermbg=68 ctermfg=none
+	highlight DiffChange cterm=bold ctermbg=68 ctermfg=none
+	highlight DiffDelete cterm=bold ctermbg=134 ctermfg=none
+	highlight DiffText cterm=bold ctermbg=234 ctermfg=none
 else
-	" Save manual folds when not in diff mode or help files
+	" Save manual folds when not in diff mode
 	augroup save_folds
 		autocmd!
 		autocmd BufWinEnter * silent! loadview
-		autocmd BufWinLeave * mkview
+		autocmd BufWinLeave * silent! mkview!
 	augroup END
 endif

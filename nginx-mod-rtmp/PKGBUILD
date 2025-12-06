@@ -1,8 +1,8 @@
-# Maintainer Scott Smith <scott@ssmith.software>
-#
 # https://gitlab.archlinux.org/archlinux/packaging/packages/nginx
 # https://gitlab.archlinux.org/archlinux/packaging/packages/nginx-mod-headers-more
 # https://wiki.archlinux.org/title/Creating_packages
+
+# Maintainer: Scott Smith <scott@ssmith.software>
 
 pkgname=nginx-mod-rtmp
 pkgrel=1

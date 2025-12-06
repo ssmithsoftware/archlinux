@@ -38,9 +38,9 @@ build () {
 
 package () {
 	local _nginxdep=$(nginx -v 2>&1)
+	_nginxdep="nginx=${_nginxdep/*\/}"
 
-	echo $_nginxdep
-	depends+=("nginx=${_nginxdep/*\/}")
+	depends+=($_nginxdep)
 
 	install -Dm644 "$srcdir/nginx-rtmp-module-$pkgver/LICENSE" \
 		"$pkgdir/usr/share/licenses/$pkgname/LICENSE"

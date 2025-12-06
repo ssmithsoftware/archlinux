@@ -1,0 +1,55 @@
+# Maintainer Scott Smith <scott@ssmith.software>
+#
+# https://gitlab.archlinux.org/archlinux/packaging/packages/nginx
+# https://gitlab.archlinux.org/archlinux/packaging/packages/nginx-mod-headers-more
+# https://wiki.archlinux.org/title/Creating_packages
+
+pkgname=nginx-mod-rtmp
+pkgrel=1
+pkgver=1.2.2
+
+arch=(x86_64)
+license=(BSD-2-Clause)
+makedepends=(nginx nginx-src)
+pkgdesc='NGINX-based Media Streaming Server'
+url=https://github.com/arut/nginx-rtmp-module
+
+backup=(etc/nginx/modules.d/20-rtmp.conf)
+sha256sums=('')
+source=("$url/archive/v$pkgver/rtmp-$pkgver.tar.gz")
+
+prepare () {
+	mkdir -p build
+
+	cd build
+	ln -sf /usr/src/nginx/auto/ /usr/src/nginx/src/ .
+}
+
+build () {
+	cd build
+	./auto/configure \
+		--with-compat \
+		--with-ld-opt="$LDFLAGS" \
+		--add-dynamic-module="../nginx-rtmp-module-$pkgver"
+
+	make modules
+}
+
+package () {
+	local _nginxdep=$(nginx -v 2>&1)
+
+	depends+=("nginx=${_nginxdep/*\/}")
+
+	install -Dm644 "$srcdir/nginx-rtmp-module-$pkgver/LICENSE" \
+		"$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+	install -dm755 "$pkgdir/etc/nginx/modules.d"
+
+	cd build/objs
+	for mod in *.so; do
+		install -Dm755 $mod "$pkgdir/usr/lib/nginx/modules/$mod"
+
+		echo "load_module \"/usr/lib/nginx/modules/$mod\";" \
+			>>"$pkgdir/etc/nginx/modules.d/20-rtmp.conf"
+	done
+}

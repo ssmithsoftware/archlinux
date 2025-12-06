@@ -9,6 +9,7 @@ pkgrel=1
 pkgver=1.2.2
 
 arch=(x86_64)
+depends=(glibc)
 license=(BSD-2-Clause)
 makedepends=(nginx nginx-src)
 pkgdesc='NGINX-based Media Streaming Server'
@@ -38,6 +39,7 @@ build () {
 package () {
 	local _nginxdep=$(nginx -v 2>&1)
 
+	echo $_nginxdep
 	depends+=("nginx=${_nginxdep/*\/}")
 
 	install -Dm644 "$srcdir/nginx-rtmp-module-$pkgver/LICENSE" \

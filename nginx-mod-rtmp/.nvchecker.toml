@@ -1,0 +1,4 @@
+[nginx-mod-rtmp]
+git = 'https://github.com/arut/nginx-rtmp-module.git'
+prefix = 'v'
+source = "git"

@@ -15,7 +15,7 @@ pkgdesc='NGINX-based Media Streaming Server'
 url=https://github.com/arut/nginx-rtmp-module
 
 backup=(etc/nginx/modules.d/20-rtmp.conf)
-sha256sums=('')
+sha256sums=('07f19b7bffec5e357bb8820c63e5281debd45f5a2e6d46b1636d9202c3e09d78')
 source=("$url/archive/v$pkgver/rtmp-$pkgver.tar.gz")
 
 prepare () {

@@ -6,13 +6,11 @@ dir="$(dirname "$(readlink -f "$0")")/"
 prompt='You must reboot to view your changes.'
 
 cd $HOME
-
 ln -fsv $dir.bash_logout $dir.bash_profile $dir.bashrc \
 	$dir.editorconfig $dir.gitconfig $dir.gittemplate/ \
 	$dir.inputrc $dir.prettierrc $dir.profile $dir.vimrc .
 
 cd $XDG_CONFIG_HOME
-
 ln -fsv $dir.config/hypr/ $dir.config/kitty/ \
 	$dir.config/uwsm/ $dir.config/waybar/ .
 

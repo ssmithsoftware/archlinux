@@ -17,8 +17,8 @@ ln -fsv $dir.config/hypr/ $dir.config/kitty/ \
 read -p "$prompt Would you like to reboot now? (y/n): " input
 
 case $input in
-	[Yy]*) echo 'Rebooting...';;
-	[Nn]*) echo 'Exiting...'; exit;;
+	[Yy]*) echo 'Rebooting';;
+	[Nn]*) echo 'Exiting'; exit;;
 	*) echo "Invalid input. $prompt"; exit 1;;
 esac
 

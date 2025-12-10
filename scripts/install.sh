@@ -2,7 +2,7 @@
 
 set -e
 
-dir="$(dirname "$(readlink -f "$0")")"
+dir=$(dirname "$(dirname "$(readlink -f "$0")")")
 prompt='You must reboot to view your changes.'
 
 cd $HOME

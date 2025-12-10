@@ -1,4 +1,5 @@
 #!/bin/sh
+# Create symlinks in $HOME directory
 
 set -e
 
@@ -17,7 +18,6 @@ ln -fsv $dir/hypr/ $dir/kitty/ \
 	$dir/pacman/ $dir/uwsm/ $dir/waybar/ .
 
 read -p "$prompt Would you like to reboot now? (y/n): " input
-
 case $input in
 	[Yy]*) echo 'Rebooting';;
 	[Nn]*) echo 'Exiting'; exit;;

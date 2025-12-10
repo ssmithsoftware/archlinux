@@ -1,13 +1,11 @@
 #!/bin/sh
 
 file=/etc/pacman.conf
-tag='<scott@ssmith.software>'
 
-if ! grep -qs $tag $file; then
+if ! grep -qs '^\[dr9n\]$' $file; then
 	sudo tee -a $file >/dev/null <<-EOF
 
-		# Maintained by: Scott Smith $tag
-		[custom]
-		Include = /etc/pacman.d/mirrorlist
+		[dr9n]
+		Server = https://static.ssmithsoftware.com/archlinux/\$repo/os/\$arch
 	EOF
 fi

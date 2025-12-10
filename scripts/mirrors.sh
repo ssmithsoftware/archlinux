@@ -12,7 +12,7 @@ EOF
 read -p "$prompt (y/n): " input
 
 case $input in
-	[Yy]*) echo "Generating latest mirrors in $file.\nPlease wait...";;
+	[Yy]*) printf "Generating latest mirrors in $file\nPlease wait...\n";;
 	[Nn]*) echo 'Exiting'; exit;;
 	*) echo 'Invalid input.'; exit 1;;
 esac

@@ -4,7 +4,7 @@ file=/etc/pacman.conf
 tag='<scott@ssmith.software>'
 
 if ! grep -qs $tag $file; then
-	cat <<-EOF >>$file
+	sudo tee -a $file >/dev/null <<-EOF
 
 		# Maintained by: Scott Smith $tag
 		[custom]

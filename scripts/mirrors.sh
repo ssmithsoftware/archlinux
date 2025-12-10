@@ -21,5 +21,5 @@ esac
 sudo reflector -c US,CA,GB -l 10 -p https --save $file --sort rate
 
 echo "Appending $url to $file"
-echo "Server = $url" | sudo cat $file - >/dev/null
+echo "Server = $url" | sudo tee -a $file >/dev/null
 echo 'Done'

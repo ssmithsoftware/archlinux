@@ -9,6 +9,7 @@ prompt=$(cat <<-EOF
 	Are you sure you want to continue?
 EOF
 )
+url='https://static.ssmithsoftware.com/archlinux/$repo/os/$arch'
 
 read -p "$prompt (y/n): " input
 case $input in
@@ -18,4 +19,7 @@ case $input in
 esac
 
 sudo reflector -c US,CA,GB -l 10 -p https --save $file --sort rate
-echo Done
+
+echo "Appending $url to $file"
+echo "Server = $url" | sudo cat $file - >/dev/null
+echo 'Done'

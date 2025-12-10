@@ -5,5 +5,5 @@ Target = nginx
 
 [Action]
 Description = Configure, make, then add nginx-mod-rtmp to match current nginx version.
-Exec = ./nginx-mod-rtmp.sh
+Exec = /usr/bin/sh -c '/home/$SUDO_USER/.config/pacman/hooks/nginx-mod-rtmp.sh'
 When = PostTransaction

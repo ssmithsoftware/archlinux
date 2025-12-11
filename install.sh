@@ -26,17 +26,9 @@ sudo cp -v "$PWD"/makepkg.conf.d/makepkg.conf /etc/makepkg.conf.d/
 sudo cp -rv "$PWD"/pacman.conf.d/ /etc/
 sudo cp -rv "$PWD"/pacman.d/hooks/ /etc/pacman.d/
 
-# Get the top ten out of 25 latest synchronized mirrors sorted by download rate
-read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input
-case $input in
-	[Yy]*)
-		echo 'Please wait...'
-		sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
-			--save /etc/pacman.d/mirrorlist --sort rate --verbose
-
-		echo 'Done';;
-	*) echo 'Skipping mirrors';;
-esac
+# Copy reflector configuration and enable systemd service
+sudo cp -v "$PWD"/xdg/reflector/reflector.conf /etc/xdg/reflector/
+sudo systemctl enable reflector.service
 
 read -p "$prompt Would you like to reboot now? (y/n): " input
 case $input in

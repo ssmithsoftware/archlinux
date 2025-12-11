@@ -1,7 +1,6 @@
 #!/bin/sh
 # Add dr9n mirrors and pacman hooks
 
-dir=/etc/pacman.d
 file=/etc/pacman.conf
 
 if ! grep -qs '^\[dr9n\]$' $file; then
@@ -14,4 +13,4 @@ if ! grep -qs '^\[dr9n\]$' $file; then
 	EOF
 fi
 
-sudo cp -rv $XDG_CONFIG_HOME/pacman/hooks/ $dir/hooks/
+sudo cp -rv $XDG_CONFIG_HOME/pacman/hooks/ /etc/pacman.d/

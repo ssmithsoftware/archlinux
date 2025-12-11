@@ -12,17 +12,16 @@ ln -fsv "$PWD"/.* $HOME
 cd ../XDG_CONFIG_HOME/
 ln -fsv "$PWD"/* $XDG_CONFIG_HOME
 
-# Include drop-in configuration directory to pacman.conf
+# Include pacman drop-in configurations
 file=/etc/pacman.conf
 
 if ! grep -qs '^Include = /etc/pacman\.conf\.d/\*\.conf$' $file; then
-	sudo sed -i '/^\[options\]$/a Include = /etc/pacman.conf.d/*.conf\n' $file \
-		&& echo 'Drop-in directory appended to pacman.conf'
+	sudo sed -i '/^\[options\]$/a Include = /etc/pacman.conf.d/*.conf\n' $file
+
+	echo 'Drop-in directory appended to pacman.conf'
 fi
 
-# Copy drop-in directories and files
 cd "$dir"
-
 sudo cp -v etc/makepkg.conf.d/makepkg.conf /etc/makepkg.conf.d/
 sudo cp -rv etc/pacman.conf.d/ /etc/
 sudo cp -rv etc/pacman.d/hooks/ /etc/pacman.d/

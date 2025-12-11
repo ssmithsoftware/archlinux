@@ -1,1 +1,1 @@
-# Linux User Home Directory Configurations
+# Arch Linux Configurations

@@ -4,6 +4,6 @@ Type = Package
 Target = nginx
 
 [Action]
-Description = Configure, make, then add nginx-mod-rtmp to match current nginx version.
+Description = Upgrade nginx-mod-rtmp to match current version of nginx
 Exec = /etc/pacman.d/hooks/nginx-mod-rtmp.sh
 When = PostTransaction

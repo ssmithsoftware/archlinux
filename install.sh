@@ -1,11 +1,11 @@
-#!/bin/bash
-# Create symlinks in current user's home directory
+#!/bin/sh
 
 set -e
 
 dir=$(dirname "$(readlink -f "$0")")
 prompt='Reboot to view any desktop environment changes.'
 
+# Create symlinks in current user's home directory
 cd "$dir"/home/user/HOME/
 ln -fsv "$PWD"/.* $HOME
 
@@ -25,6 +25,18 @@ cd "$dir"
 sudo cp -v etc/makepkg.conf.d/makepkg.conf /etc/makepkg.conf.d/
 sudo cp -rv etc/pacman.conf.d/ /etc/
 sudo cp -rv etc/pacman.d/hooks/ /etc/pacman.d/
+
+# Get the top ten out of 25 latest synchronized mirrors sorted by download rate
+read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input
+case $input in
+	[Yy]*)
+		echo 'Please wait...'
+		sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
+			--save /etc/pacman.d/mirrorlist --sort rate
+
+		echo 'Done';;
+	*) echo 'Skipping mirrors';;
+esac
 
 read -p "$prompt Would you like to reboot now? (y/n): " input
 case $input in

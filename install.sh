@@ -21,10 +21,10 @@ if ! grep -qs '^Include = /etc/pacman\.conf\.d/\*\.conf$' $file; then
 	echo 'Drop-in directory appended to pacman.conf'
 fi
 
-cd "$dir"
-sudo cp -v etc/makepkg.conf.d/makepkg.conf /etc/makepkg.conf.d/
-sudo cp -rv etc/pacman.conf.d/ /etc/
-sudo cp -rv etc/pacman.d/hooks/ /etc/pacman.d/
+cd "$dir"/etc/
+sudo cp -v "$PWD"/makepkg.conf.d/makepkg.conf /etc/makepkg.conf.d/
+sudo cp -rv "$PWD"/pacman.conf.d/ /etc/
+sudo cp -rv "$PWD"/pacman.d/hooks/ /etc/pacman.d/
 
 # Get the top ten out of 25 latest synchronized mirrors sorted by download rate
 read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input
@@ -32,7 +32,7 @@ case $input in
 	[Yy]*)
 		echo 'Please wait...'
 		sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
-			--save /etc/pacman.d/mirrorlist --sort rate
+			--save /etc/pacman.d/mirrorlist --sort rate --verbose
 
 		echo 'Done';;
 	*) echo 'Skipping mirrors';;

@@ -1,0 +1,3 @@
+[submodule "nginx-mod-rtmp"]
+	path = packages/nginx-mod-rtmp
+	url = https://github.com/ssmithsoftware/nginx-mod-rtmp.git

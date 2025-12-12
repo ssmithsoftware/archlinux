@@ -23,11 +23,16 @@ set hlsearch
 set incsearch
 
 if &diff
-	" Adjust syntax highlighting for diff
+	" Adjust syntax highlighting for diff. See scripts/256.sh
 	highlight DiffAdd cterm=bold ctermbg=68 ctermfg=none
 	highlight DiffChange cterm=bold ctermbg=68 ctermfg=none
 	highlight DiffDelete cterm=bold ctermbg=134 ctermfg=none
 	highlight DiffText cterm=bold ctermbg=234 ctermfg=none
+
+	" git diffs reside in /tmp and will not be affected by .editorconfig
+	set shiftwidth=4
+	set softtabstop=4
+	set tabstop=4
 else
 	" Save manual folds when not in diff mode
 	augroup save_folds

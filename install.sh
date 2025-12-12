@@ -2,8 +2,8 @@
 
 set -e
 
+# Directory of this script
 dir=$(dirname "$(readlink -f "$0")")
-prompt='Reboot to view any desktop environment changes.'
 
 # Create symlinks in current user's home directory
 cd "$dir"/home/USER/HOME/
@@ -12,18 +12,21 @@ ln -fsv "$PWD"/.* $HOME/
 cd ../XDG_CONFIG_HOME/
 ln -fsv "$PWD"/* $XDG_CONFIG_HOME/
 
-# Include pacman drop-in configurations
-file=/etc/pacman.conf
+# Include and install pacman drop-in configurations directory
+path=/etc/pacman.conf
 
-if ! grep -qs '^Include = /etc/pacman\.conf\.d/\*\.conf$' $file; then
-	printf "\n[options]\nInclude = /etc/pacman.conf.d/*.conf" \
-		| sudo tee -a $file >/dev/null 2>&1
+if ! grep -qs '^Include = /etc/pacman\.conf\.d/\*\.conf$' $path; then
+	printf "\n[options]\nInclude = $path.d/*.conf" \
+		| sudo tee -a $path
+	echo
 fi
 
-cd "$dir"/etc/
-sudo install -m755 "$PWD"/pacman.conf.d/ /etc/
+path=$path.d/
 
-# Retrieve top 10 of 25 latest synchronized mirrors sorted by download rate
+cd "$dir"$path
+sudo install -Dvm755 -t $path "$PWD"/*.conf
+
+# Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input
 case $input in
 	[Yy]*)
@@ -34,6 +37,9 @@ case $input in
 		echo 'Done';;
 	*) echo 'Skipping mirrors';;
 esac
+
+# First time hyprland changes will be viewable after reboot
+prompt='Reboot to view any desktop environment changes.'
 
 read -p "$prompt Would you like to reboot now? (y/n): " input
 case $input in

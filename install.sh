@@ -21,10 +21,16 @@ if ! grep -qs '^Include = /etc/pacman\.conf\.d/\*\.conf$' $path; then
 	echo
 fi
 
-path=$path.d/
+path=$path.d
 
-cd "$dir"$path
-sudo install -Dvm755 -t $path "$PWD"/*.conf
+cd "$dir"$path/
+sudo install -Dvm755 -t $path/ "$PWD"/*.conf
+
+# Install pacman hooks
+path=/etc/pacman.d
+
+cd "$dir"$path/
+sudo install -Dvm755 -t $path/hooks/ "$PWD"/hooks/*
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input
@@ -32,7 +38,7 @@ case $input in
 	[Yy]*)
 		echo 'Please wait...'
 		sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
-			--save /etc/pacman.d/mirrorlist --sort rate --verbose
+			--save $path/mirrorlist --sort rate --verbose
 
 		echo 'Done';;
 	*) echo 'Skipping mirrors';;

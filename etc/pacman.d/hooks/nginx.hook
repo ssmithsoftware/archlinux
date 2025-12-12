@@ -1,0 +1,8 @@
+[Trigger]
+Operation = Install
+Target = nginx
+Type = Package
+
+[Action]
+Exec = /etc/pacman.d/hooks/nginx.sh
+When = PostTransaction

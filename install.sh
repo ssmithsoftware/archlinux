@@ -23,7 +23,7 @@ fi
 cd "$dir"/etc/
 sudo install -m755 "$PWD"/pacman.conf.d/ /etc/
 
-# Get top 10 of 25 latest synchronized mirrors sorted by download rate
+# Retrieve top 10 of 25 latest synchronized mirrors sorted by download rate
 read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input
 case $input in
 	[Yy]*)

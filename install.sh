@@ -24,13 +24,14 @@ fi
 path=$path.d
 
 cd "$dir"$path/
-sudo install -Dvm755 -t $path/ "$PWD"/*.conf
+sudo install -Dvm644 -t $path/ "$PWD"/*.conf
 
-# Install pacman hooks
+# Install pacman hooks and corresponding scripts
 path=/etc/pacman.d
 
 cd "$dir"$path/
-sudo install -Dvm755 -t $path/hooks/ "$PWD"/hooks/*
+sudo install -Dvm644 -t $path/hooks/ "$PWD"/hooks/*.hook
+sudo install -vm755 -t $path/hooks/ "$PWD"/hooks/*.sh
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 read -p "Would you like to retrieve the latest pacman mirrors? (y/n): " input

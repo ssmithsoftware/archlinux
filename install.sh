@@ -45,7 +45,7 @@ case $input in
 	*) echo 'Skipping mirrors';;
 esac
 
-# First time hyprland changes will be viewable after reboot
+# First time desktop environment changes will be viewable after reboot
 prompt='Reboot to view any desktop environment changes.'
 
 read -p "$prompt Would you like to reboot now? (y/n): " input

@@ -120,7 +120,7 @@ sudo arch-chroot /mnt sh <<-EOF
 	EOFROOT
 
 	# Display updated systemd-boot config
-	bootctl
+	bootctl status
 
 	# Reset all pacman keys on the system
 	#	Allows root to be unmounted

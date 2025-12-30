@@ -30,7 +30,7 @@ sudo mkfs.ext4 $part_root
 #	Removes Group/Others file/directory permissions on /mnt/boot/
 #	Suppresses systemd-boot security hole warnings
 sudo mount $part_root /mnt/
-sudo mount -m=0700 $part_efi /mnt/boot/
+sudo mount -m -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 #	Updates local mirrorlist to be shared with root by pacstrap

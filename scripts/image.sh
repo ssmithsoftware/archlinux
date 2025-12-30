@@ -39,7 +39,7 @@ sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
 
 # Use default keymap on root
 #	Removes error on first initramfs image generation
-echo KEYMAP=us | sudo tee -a /mnt/etc/vconsole.conf
+echo KEYMAP=us | sudo tee /mnt/etc/vconsole.conf
 
 # Begin system installation using basic packages
 sudo pacstrap -K /mnt \

@@ -31,7 +31,7 @@ sudo mount $part_root /mnt/
 sudo mount --mkdir $part_efi /mnt/boot/
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
-#	Will update local mirrorlist and be transferred to root by pacstrap
+#	Updates local mirrorlist to be shared with root by pacstrap
 sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
 	--save $path/mirrorlist --sort rate --verbose
 
@@ -50,9 +50,6 @@ genfstab -U /mnt \
 
 # Add domain name resolution for software that reads /etc/resolv.conf directly
 sudo ln -fsv /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
-
-# Root UUID is needed for systemd-boot on root
-uuid_root=$(lsblk -dno UUID $part_root)
 
 # Change root and configure installation
 sudo arch-chroot /mnt sh <<-EOF
@@ -115,7 +112,7 @@ sudo arch-chroot /mnt sh <<-EOF
 		title Arch Linux
 		linux /vmlinuz-linux
 		initrd /initramfs-linux.img
-		options root=UUID=$uuid_root rw
+		options root=UUID=$(lsblk -dno UUID $part_root) rw
 	EOFROOT
 
 	# Display updated systemd-boot config

@@ -38,7 +38,7 @@ sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
 # Begin system installation using basic packages
 sudo pacstrap -K /mnt \
 	base cloud-guest-utils cloud-init linux \
-	man-db man-pages openssh reflector vim
+	man-db man-pages openssh vim
 
 # Generate fstab to persist filesystem hierarchy
 #	Removes active swap partitions

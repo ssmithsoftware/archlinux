@@ -99,7 +99,7 @@ sudo arch-chroot /mnt sh <<-EOF
 	# Configure mkinitcpio.conf
 	hooks='base systemd autodetect modconf block filesystems fsck'
 
-	sed -i 's/^\(HOOKS=(\).*)/\1\\$hooks)/' /etc/mkinitcpio.conf
+	sed -i 's/^\(HOOKS=(\).*)/\1\$hooks)/' /etc/mkinitcpio.conf
 	mkinitcpio -P
 
 	# Configure systemd-boot
@@ -122,6 +122,7 @@ sudo arch-chroot /mnt sh <<-EOF
 	bootctl
 
 	# Reset all pacman keys on the system
+	#	Allows root to be unmounted
 	rm -fr /etc/pacman.d/gnupg/
 EOF
 

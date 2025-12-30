@@ -39,6 +39,7 @@ sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
 
 # Use default keymap on root
 #	Removes error on first initramfs image generation
+sudo mkdir -p /mnt/etc/
 echo KEYMAP=us | sudo tee /mnt/etc/vconsole.conf
 
 # Begin system installation using basic packages

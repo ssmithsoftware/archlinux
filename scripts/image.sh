@@ -35,7 +35,7 @@ sudo mount -mo dmask=0077,fmask=0077 $part_efi /mnt/boot/
 sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
 	--save /etc/pacman.d/mirrorlist --sort rate --verbose
 
-# Use default keymap
+# Use default keymap on root
 #	Removes error on first initramfs image generation
 echo KEYMAP=us | sudo tee -a /mnt/etc/vconsole.conf
 

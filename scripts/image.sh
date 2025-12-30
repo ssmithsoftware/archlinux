@@ -26,9 +26,11 @@ EOF
 sudo mkfs.fat -F 32 $part_efi
 sudo mkfs.ext4 $part_root
 
-# Prepare mount points
+# Attach mounts
+#	Removes Group/Others file/directory permissions on /mnt/boot/
+#	Suppresses systemd-boot security hole warnings
 sudo mount $part_root /mnt/
-sudo mount -mo dmask=0077,fmask=0077 $part_efi /mnt/boot/
+sudo mount -m=0700 $part_efi /mnt/boot/
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 #	Updates local mirrorlist to be shared with root by pacstrap
@@ -45,9 +47,7 @@ sudo pacstrap -K /mnt \
 	man-db man-pages openssh vim
 
 # Generate fstab to persist filesystem hierarchy
-#	Removes active swap partitions
-#	Removes Group/Others file/directory permissions on /mnt/boot/
-#		Fixes systemd-boot security holes
+#	Removes any swap partitions and persists /mnt/boot/ permissions
 genfstab -U /mnt \
 	| sed '/swap/d; s/\(mask=00\)22/\177/g' \
 	| sudo tee -a /mnt/etc/fstab

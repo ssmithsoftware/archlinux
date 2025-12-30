@@ -28,12 +28,16 @@ sudo mkfs.ext4 $part_root
 
 # Prepare mount points
 sudo mount $part_root /mnt/
-sudo mount --mkdir $part_efi /mnt/boot/
+sudo mount -mo dmask=0077,fmask=0077 $part_efi /mnt/boot/
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 #	Updates local mirrorlist to be shared with root by pacstrap
 sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
 	--save /etc/pacman.d/mirrorlist --sort rate --verbose
+
+# Use default keymap
+#	Removes error on first initramfs image generation
+echo KEYMAP=us | sudo tee -a /mnt/etc/vconsole.conf
 
 # Begin system installation using basic packages
 sudo pacstrap -K /mnt \

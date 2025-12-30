@@ -33,7 +33,7 @@ sudo mount --mkdir $part_efi /mnt/boot/
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 #	Updates local mirrorlist to be shared with root by pacstrap
 sudo reflector -c US,CA,GB -l 25 -n 10 -p https \
-	--save $path/mirrorlist --sort rate --verbose
+	--save /etc/pacman.d/mirrorlist --sort rate --verbose
 
 # Begin system installation using basic packages
 sudo pacstrap -K /mnt \

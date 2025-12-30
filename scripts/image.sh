@@ -45,7 +45,7 @@ sudo pacstrap -K /mnt \
 #	Removes Group/Others file/directory permissions on /mnt/boot/
 #		Fixes systemd-boot security holes
 genfstab -U /mnt \
-	| sed '/swap/d; s/\(mask=00\)22/\177/g'
+	| sed '/swap/d; s/\(mask=00\)22/\177/g' \
 	| sudo tee -a /mnt/etc/fstab
 
 # Add domain name resolution for software that reads /etc/resolv.conf directly

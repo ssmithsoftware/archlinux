@@ -27,10 +27,9 @@ sudo mkfs.fat -F 32 $part_efi
 sudo mkfs.ext4 $part_root
 
 # Attach mounts
-#	Removes Group/Others file/directory permissions on /mnt/boot/
-#	Suppresses systemd-boot security hole warnings
+#	Use basic permissions on ESP to suppress filesystem warning during pacstrap
 sudo mount $part_root /mnt/
-sudo mount -m -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
+sudo mount -m $part_efi /mnt/boot/
 
 # Get top 10 of 25 latest synchronized https mirrors sorted by download rate
 #	Updates local mirrorlist to be shared with root by pacstrap
@@ -48,12 +47,14 @@ sudo pacstrap -K /mnt \
 	man-db man-pages openssh vim
 
 # Generate fstab to persist filesystem hierarchy
-#	Removes any swap partitions and persists /mnt/boot/ permissions
+#	Removes swap partitions
+#	Removes Group/Others file/directory permissions on /mnt/boot/
 genfstab -U /mnt \
 	| sed '/swap/d; s/\(mask=00\)22/\177/g' \
 	| sudo tee -a /mnt/etc/fstab
 
 # Add domain name resolution for software that reads /etc/resolv.conf directly
+#	Done outside of root because arch-chroot adds the link temporarily
 sudo ln -fsv /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 
 # Change root and configure installation
@@ -98,13 +99,18 @@ sudo arch-chroot /mnt sh <<-EOF
 	ln -fsv /usr/lib/systemd/network/89-ethernet.network.example \
 		/etc/systemd/network/89-ethernet.network
 
-	# Configure mkinitcpio.conf
+	# Configure mkinitcpio.conf and regenerate initramfs image
 	hooks='base systemd autodetect modconf block filesystems fsck'
 
-	sed -i 's/^\(HOOKS=(\).*)/\1\$hooks)/' /etc/mkinitcpio.conf
+	sed -i "s/^\(HOOKS=(\).*)/\1\$hooks)/" /etc/mkinitcpio.conf
 	mkinitcpio -P
 
 	# Configure systemd-boot
+	#	Reattach ESP with proper permissions
+	#	Suppresses systemd-boot "Security Holes" warning
+	umount /mnt/boot/
+	mount -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
+
 	#	Firmware is inaccessible and EFI variables are not needed
 	bootctl --variables=no install
 
@@ -121,14 +127,14 @@ sudo arch-chroot /mnt sh <<-EOF
 	EOFROOT
 
 	# Display updated systemd-boot config
-	bootctl status
+	# bootctl status
 
 	# Reset all pacman keys on the system
 	#	Allows root to be unmounted
 	rm -fr /etc/pacman.d/gnupg/
 EOF
 
-# Unmount mount points and detach loop device
+# Detach mounts and loop device
 sudo umount /mnt/boot/
 sudo umount /mnt/
 

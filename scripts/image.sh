@@ -106,8 +106,9 @@ sudo arch-chroot -S /mnt sh <<-EOF
 	mkinitcpio -P
 
 	# Configure systemd-boot
+	#	Reattach ESP with proper permissions
 	#	Suppresses systemd-boot "Security Holes" warning
-	chmod 700 /boot/
+	mount -o remount,umask=0077 $part_efi /boot/
 
 	#	Firmware is inaccessible and EFI variables are not needed
 	bootctl --variables=no install
@@ -123,9 +124,6 @@ sudo arch-chroot -S /mnt sh <<-EOF
 		initrd /initramfs-linux.img
 		options root=UUID=$(lsblk -dno UUID $part_root) rw
 	EOFROOT
-
-	# Display updated systemd-boot config
-	bootctl status
 
 	# Reset all pacman keys on the system
 	#	Allows root to be unmounted

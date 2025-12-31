@@ -46,22 +46,22 @@ sudo pacstrap -K /mnt \
 	base cloud-guest-utils cloud-init linux \
 	man-db man-pages openssh vim
 
+# Reattach ESP with proper permissions prior to arch-chroot
+#	Removes Group/Others directory/file permissions on /mnt/boot/
+#	Requires a detach/attach cycle to set FAT-specific options
+#	Suppresses systemd-boot "Security Holes" warning
+sudo umount /mnt/boot/
+sudo mount -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
+
 # Generate fstab to persist filesystem hierarchy
 #	Removes swap partitions
-#	Removes Group/Others file/directory permissions on /mnt/boot/
 genfstab -U /mnt \
-	| sed '/swap/d; s/\(mask=00\)22/\177/g' \
+	| grep -v swap \
 	| sudo tee -a /mnt/etc/fstab
 
 # Add domain name resolution for software that reads /etc/resolv.conf directly
 #	Done outside of root because arch-chroot adds the link temporarily
 sudo ln -fsv /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
-
-# Reattach ESP with proper permissions prior to arch-chroot
-#	Requires a detach/attach cycle to set FAT-specific options
-#	Suppresses systemd-boot "Security Holes" warning
-sudo umount /mnt/boot/
-sudo mount -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
 
 # Change root and configure installation
 sudo arch-chroot -S /mnt sh <<-EOF

@@ -125,6 +125,9 @@ sudo arch-chroot -S /mnt sh <<-EOF
 		options root=UUID=$(lsblk -dno UUID $part_root) rw
 	EOFROOT
 
+	# Display updated systemd-boot config
+	bootctl status | cat
+
 	# Reset all pacman keys on the system
 	#	Allows root to be unmounted
 	rm -fr /etc/pacman.d/gnupg/

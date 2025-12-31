@@ -58,7 +58,7 @@ genfstab -U /mnt \
 sudo ln -fsv /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 
 # Change root and configure installation
-sudo arch-chroot /mnt sh <<-EOF
+sudo arch-chroot -S /mnt sh <<-EOF
 	# Set local time to UTC
 	ln -fsv /usr/share/zoneinfo/UTC /etc/localtime
 
@@ -106,10 +106,8 @@ sudo arch-chroot /mnt sh <<-EOF
 	mkinitcpio -P
 
 	# Configure systemd-boot
-	#	Reattach ESP with proper permissions
 	#	Suppresses systemd-boot "Security Holes" warning
-	umount /mnt/boot/
-	mount -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
+	chmod 700 /boot/
 
 	#	Firmware is inaccessible and EFI variables are not needed
 	bootctl --variables=no install
@@ -127,7 +125,7 @@ sudo arch-chroot /mnt sh <<-EOF
 	EOFROOT
 
 	# Display updated systemd-boot config
-	# bootctl status
+	bootctl status
 
 	# Reset all pacman keys on the system
 	#	Allows root to be unmounted

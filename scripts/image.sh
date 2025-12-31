@@ -57,6 +57,12 @@ genfstab -U /mnt \
 #	Done outside of root because arch-chroot adds the link temporarily
 sudo ln -fsv /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 
+# Reattach ESP with proper permissions prior to arch-chroot
+#	Requires a detach/attach cycle to set FAT-specific options
+#	Suppresses systemd-boot "Security Holes" warning
+sudo umount /mnt/boot/
+sudo mount -o dmask=0077,fmask=0077 $part_efi /mnt/boot/
+
 # Change root and configure installation
 sudo arch-chroot -S /mnt sh <<-EOF
 	# Set local time to UTC
@@ -106,10 +112,6 @@ sudo arch-chroot -S /mnt sh <<-EOF
 	mkinitcpio -P
 
 	# Configure systemd-boot
-	#	Reattach ESP with proper permissions
-	#	Suppresses systemd-boot "Security Holes" warning
-	mount -o remount,umask=0077 $part_efi /boot/
-
 	#	Firmware is inaccessible and EFI variables are not needed
 	bootctl --variables=no install
 

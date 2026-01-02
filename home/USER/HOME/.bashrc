@@ -17,7 +17,7 @@ bold="\[$(tput bold)\]"
 green="\[$(tput setaf 2)\]"
 reset="\[$(tput sgr0)\]"
 
-# Default
+# Default prompt
 # PS1='[\u@\h \W]\$ '
 
 # https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt-1

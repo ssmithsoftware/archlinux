@@ -30,9 +30,10 @@ if &diff
 	highlight DiffText cterm=bold ctermbg=234 ctermfg=none
 
 	" git diffs reside in /tmp and will not be affected by .editorconfig
-	set shiftwidth=4
-	set softtabstop=4
-	set tabstop=4
+  set expandtab
+	set shiftwidth=2
+	set softtabstop=2
+	set tabstop=2
 else
 	" Save manual folds when not in diff mode
 	augroup save_folds

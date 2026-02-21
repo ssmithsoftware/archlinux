@@ -18,27 +18,28 @@ let &t_SR = "\e[3 q"
 " End insert/replace mode sets cursor to block
 let &t_EI = "\e[1 q"
 
+colorscheme default
 set autoindent
 set hlsearch
 set incsearch
 
 if &diff
-	" Adjust syntax highlighting for diff. See scripts/256.sh
-	highlight DiffAdd cterm=bold ctermbg=68 ctermfg=none
-	highlight DiffChange cterm=bold ctermbg=68 ctermfg=none
-	highlight DiffDelete cterm=bold ctermbg=134 ctermfg=none
-	highlight DiffText cterm=bold ctermbg=234 ctermfg=none
+  " Adjust syntax highlighting for diff. See scripts/256.sh
+  highlight DiffAdd cterm=bold ctermbg=68 ctermfg=none
+  highlight DiffChange cterm=bold ctermbg=68 ctermfg=none
+  highlight DiffDelete cterm=bold ctermbg=134 ctermfg=none
+  highlight DiffText cterm=bold ctermbg=234 ctermfg=none
 
-	" git diffs reside in /tmp and will not be affected by .editorconfig
+  " git diffs reside in /tmp and will not be affected by .editorconfig
   set expandtab
-	set shiftwidth=2
-	set softtabstop=2
-	set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
+  set tabstop=2
 else
-	" Save manual folds when not in diff mode
-	augroup save_folds
-		autocmd!
-		autocmd BufWinEnter * silent! loadview
-		autocmd BufWinLeave * silent! mkview!
-	augroup END
+  " Save manual folds when not in diff mode
+  augroup save_folds
+    autocmd!
+    autocmd BufWinEnter * silent! loadview
+    autocmd BufWinLeave * silent! mkview!
+  augroup END
 endif

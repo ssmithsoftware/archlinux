@@ -11,7 +11,7 @@ file=archlinux-$(date +%Y.%m.%d)-$(uname -m).img
 dd if=/dev/zero of=$dir/$file bs=1 count=0 seek=8G
 
 # Initialize loop device
-device=$(sudo losetup -fPv --show $dir/$file)
+device=$(sudo losetup -fP --show $dir/$file)
 part_efi=${device}p1
 part_root=${device}p2
 

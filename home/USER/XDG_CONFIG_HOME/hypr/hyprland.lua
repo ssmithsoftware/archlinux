@@ -12,7 +12,7 @@ hl.config({
   dwindle = { preserve_split = true },
   general = {
     -- CSS named colors: deepskyblue, springgreen
-    col = { active_border = { colors = { '#00bfff', '#00ff7f' } } },
+    col = { active_border = { angle = 45, colors = { '#00bfff', '#00ff7f' } } },
     gaps_in = 0,
     gaps_out = 0
   },

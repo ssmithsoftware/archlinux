@@ -40,13 +40,12 @@ button,
 
 button.active,
 .text-button:hover {
-  /* Gradient colors inspired by hyprland.conf default border active with lowered opacity. */
+  /* CSS named colors: deepskyblue, springgreen */
   background-image: linear-gradient(
     to bottom right,
-    rgba(51, 204, 255, 0.5) 50%,
-    rgba(0, 255, 153, 0.5)
+    alpha(#00bfff, 0.5) 50%,
+    alpha(#00ff7f, 0.5)
   );
-  /* TODO: dr9n gradient uses deepskyblue to springgreen CSS named colors */
 }
 
 button:hover {

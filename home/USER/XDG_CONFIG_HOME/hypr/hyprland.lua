@@ -16,6 +16,7 @@ hl.config({
     gaps_in = 0,
     gaps_out = 0
   },
+  input = { repeat_delay = 300 },
   misc = {
     disable_hyprland_logo = true,
     disable_splash_rendering = true,
